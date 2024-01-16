@@ -1,0 +1,53 @@
+.container {
+  position: fixed;
+}
+
+.item {
+  position: relative;
+  background-color: var(--bgLight);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.bgContainer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+}
+
+.bg {
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 70%;
+}
+
+.notification {
+  font-weight: bold;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--textSoft);
+}
+.button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bgSoft);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+}
