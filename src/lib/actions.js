@@ -5,6 +5,8 @@ import { Product, User } from "./models";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
+import { AuthError } from "next-auth";
+import { signIn } from "./auth";
 
 export const addUser = async (formData) => {
   const { username, email, password, phone, address, isAdmin, isActive } =
@@ -158,4 +160,26 @@ export const deleteProduct = async (formData) => {
 
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
+};
+
+export const authenticate = async (prevState, formData) => {
+  const { email, password } = Object.fromEntries(formData);
+
+  try {
+    //TODO: callbackUrl이 정확히 어떻게 작동하는지 알아야함.
+
+    await signIn("credentials", { email, password, callbackUrl: "/" });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+
+    // console.log(error);
+    throw error;
+  }
 };
